@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+// Improve this!
+public class BushfireGameManager : MonoBehaviour
 {
     public enum GameState { MainMenu, InGame, GameOver }
     public static GameState currentState = GameState.MainMenu;
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     float fireSpawnTimer = 0.5f;
     public static int firesPutOut = 0;
 
+    // Improve this!
     void Update()
     {
         switch (currentState)
@@ -20,8 +22,12 @@ public class GameManager : MonoBehaviour
                 fireSpawnTimer -= Time.deltaTime;
                 if (fireSpawnTimer <= 0f)
                 {
-                    fireSpawnTimer = Random.Range(0f, 0.5f);
-                    EventManager.MethodSpawnFire();
+                    //fireSpawnTimer = Random.Range(0f, 0.5f);
+                    //fireSpawnTimer = Random.Range(0f, 1f);
+                    //fireSpawnTimer = Random.Range(0f, 1.5f);
+                    //fireSpawnTimer = Random.Range(0f, 2f);
+                    fireSpawnTimer = 1f;
+                    BushfireEventManager.MethodSpawnFire();
                 }
 
                 if (WaterGun.waterLeft <= 0f)
@@ -35,6 +41,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Improve this!
     private void OnGUI()
     {
         switch (currentState)
@@ -64,7 +71,11 @@ public class GameManager : MonoBehaviour
                 GUILayout.Box("Game over!\n You put out " + firesPutOut + " fires. Good work!");
                 if (GUILayout.Button("Click to play again"))
                 {
-                    StartGame();
+                    // Improve this!
+                    //StartGame();
+                    WaterGun.waterLeft = 30f;
+                    firesPutOut = 0;
+                    currentState = GameState.InGame;
                 }
                 GUILayout.EndVertical();
                 GUILayout.EndArea();

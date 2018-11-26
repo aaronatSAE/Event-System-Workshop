@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using System.Collections;
 
-public class MinionSpawner : MonoBehaviour
+public class TutorialMinionSpawner : MonoBehaviour
 {
 
     public int spawnCount;

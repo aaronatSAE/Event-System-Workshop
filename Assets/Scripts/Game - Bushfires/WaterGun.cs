@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Improve this!
 public class WaterGun : MonoBehaviour
 {
     public GameObject waterPrefab;
     public static float waterLeft = 30f;
-    float distance = 1000f;
 
     /// <summary>
     /// Called whenever the attached object is created or enabled in a scene.
     /// </summary>
     private void OnEnable()
     {
-        EventManager.OnMouseClick += ShootWater;
+        BushfireEventManager.OnMouseClick += ShootWater;
     }
 
     /// <summary>
@@ -21,16 +21,16 @@ public class WaterGun : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        EventManager.OnMouseClick -= ShootWater;
+        BushfireEventManager.OnMouseClick -= ShootWater;
     }
 
     void ShootWater()
     {
-        if(GameManager.currentState == GameManager.GameState.InGame)
+        if(BushfireGameManager.currentState == BushfireGameManager.GameState.InGame)
         {
             waterLeft -= Time.deltaTime;
 
-            var position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
+            var position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1000f);
             position = Camera.main.ScreenToWorldPoint(position);
 
             GameObject newObject = Instantiate(waterPrefab, Camera.main.transform.position + Vector3.down * 2f, Quaternion.identity);
